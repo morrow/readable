@@ -1,0 +1,21 @@
+header nav {
+  display: block;
+  padding:1em;
+  background:#eee;
+}
+
+header nav a {
+  margin:0.2em 0.5em;
+  font-weight:bold;
+  padding:0.25em 0.5em;
+  border-radius:3px;
+  text-align:center;
+}
+
+header nav a:hover {
+  background:#ddd;
+}
+
+header nav a.active {
+  background:#ccc;
+}

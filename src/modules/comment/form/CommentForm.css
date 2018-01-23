@@ -1,0 +1,8 @@
+.comment-form label {
+  display:inline-block;
+  min-width:100px;
+}
+
+.comment-form input {
+  padding:0.2em;
+}

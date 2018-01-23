@@ -1,0 +1,9 @@
+.post-form label {
+  display:inline-block;
+  min-width:100px;
+}
+
+.post-form input, .post-form textarea {
+  padding:0.2em;
+}
+

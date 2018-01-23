@@ -1,0 +1,42 @@
+#flash {
+  text-align:center;
+  overflow:hidden;
+  height:0;
+  padding:0;
+  animation: showAnimation 0.25s ease-out 0s forwards, hideAnimation 0.5s ease-in 3s forwards;
+}
+
+#flash.success {
+  background:rgb(0,255,0);
+}
+
+#flash.warn {
+  background:orange;
+}
+
+
+@keyframes hideAnimation {
+  0% {
+    height:1.5em;
+    padding:1em;
+    opacity:1;
+  }
+  100% {
+    height:0;
+    padding:0;
+    opacity:0;
+  }
+}
+
+@keyframes showAnimation {
+  0% {
+    height:0;
+    padding:0;
+    opacity:0;
+  }
+  100% {
+    height:1.5em;
+    padding:1em;
+    opacity:1;
+  }
+}
