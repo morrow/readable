@@ -1,0 +1,39 @@
+@media only screen and (max-device-width: 750px) {
+  header nav a {
+    display: block;
+  }
+  .sidebar {
+    display: none !important;
+  }
+  h1 {
+    font-size:1.2em !important;
+  }
+  h2 {
+    font-size:1.1em !important;
+  }
+  main {
+    margin-left: 0 !important;
+    width:90% !important;
+    font-size:1.3em !important;
+  }
+  #posts .post-score-actions {
+    float:left !important;
+    margin-left: 0 !important;
+  }
+  #posts .post .post-title {
+    font-size:0.9em;
+    text-decoration: underline;
+    margin-left: 0.8em;
+  }
+  #posts .post .post-actions a {
+    font-size:0.9em;
+  }
+}
+
+form input[type=text], input[type=submit], textarea {
+  border: 1px solid #ccc !important;
+}
+
+form.vote-button-form input[type=text], input[type=submit], textarea {
+  border: none !important;
+}

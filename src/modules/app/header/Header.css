@@ -19,3 +19,10 @@ header nav a:hover {
 header nav a.active {
   background:#ccc;
 }
+
+header nav a.logo {
+  margin-left: 0;
+  font-size:1.5em;
+  background: #09f;
+  color:white;
+}

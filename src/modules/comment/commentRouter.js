@@ -7,9 +7,9 @@ import { getCurrentUser, getSlug, isAuthorizedToUpdate } from '../app/appHelpers
 import { getNewComment } from './commentHelpers'
 
 export const commentRouter = (state, route)=> {
-  if(state.app.comment_id || state.app.comment_slug){
+  if(state.app.id || state.app.comment_slug){
     let comment = state.comment.comments.filter((comment) => {
-      return comment.id == state.app.id || getSlug(comment.name) === state.app.slug
+      return parseInt(comment.id) == parseInt(state.app.id) || getSlug(comment.name) === state.app.slug
     })[0]
     if(comment == undefined){
       return null
@@ -22,12 +22,20 @@ export const commentRouter = (state, route)=> {
         </div>
       )
     }
+    else if(state.app.action === 'delete'){
+      return (
+        <div id='comment'>
+          <h1>Delete Comment?</h1>
+          <CommentFormContainer data={comment} commentAction='delete' />
+        </div>
+      )
+    }
     else if(state.app.action === 'show'){
       return (
         <div id='comment'>
           <h1>Comment</h1>
           <Comment data={comment} />
-          { isAuthorizedToUpdate(getCurrentUser(), comment) &&
+          { isAuthorizedToUpdate(comment) &&
             <LinkContainer href='edit' className='action'>Edit</LinkContainer>
           }
         </div>

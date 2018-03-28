@@ -1,0 +1,1 @@
+export const getUserLink = user => `/users/${user}`

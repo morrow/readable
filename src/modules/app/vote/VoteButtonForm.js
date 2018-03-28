@@ -1,6 +1,7 @@
 import React from 'react'
+import './VoteButtonForm.css'
 
-const VoteButton = props => {
+const VoteButtonForm = props => {
   let direction = {
     up: '▲',
     down: '▼'
@@ -9,7 +10,9 @@ const VoteButton = props => {
      <form
       className='vote-button-form'
       onSubmit={props.onSubmit}
-      action='#'>
+      action='#'
+      data-direction={props.direction}
+      data-voted-on={props.voted}>
       <input
         type='hidden'
         name='target'
@@ -19,7 +22,12 @@ const VoteButton = props => {
         type='hidden'
         name='direction'
         id='direction'
-        value={direction} />
+        value={props.direction} />
+      <input
+        type='hidden'
+        name='targetType'
+        id='targetType'
+        value={props.targetType} />
       <input
         type='submit'
         value={direction} />
@@ -27,4 +35,4 @@ const VoteButton = props => {
   )
 }
 
-export default VoteButton
+export default VoteButtonForm

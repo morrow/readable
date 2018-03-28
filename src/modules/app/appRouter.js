@@ -2,18 +2,23 @@ import { errorRouter } from '../error/errorRouter'
 import { homeRouter } from '../home/homeRouter'
 import { postRouter } from '../post/postRouter'
 import { commentRouter } from '../comment/commentRouter'
+import { categoryRouter } from '../category/categoryRouter'
+import { userRouter } from '../user/userRouter'
 
 const routers = {
   error: errorRouter,
-  index:  homeRouter,
-  post: postRouter,
+  index:  postRouter,
   posts: postRouter,
-  comment: commentRouter,
+  comments: commentRouter,
+  categories: categoryRouter,
+  user: userRouter,
+  users: userRouter,
 }
 
 const aliases = {
   '/login': 'session',
   '/register': 'user',
+  '/': 'posts',
 }
 
 export const appRouter = (state, route=state.app.controller) => {

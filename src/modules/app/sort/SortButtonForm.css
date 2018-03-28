@@ -1,0 +1,14 @@
+.sort-by .vote-button-form, .sort-by .vote-button-form input {
+  display: inline-block;
+}
+
+.sort-by .vote-button-form input {
+  background: #eee;
+  border-radius:3px;
+  border:1px solid #ccc;
+  margin-left:0.5em;
+}
+
+.sort-by .vote-button-form[data-currently-selected=true] input {
+  background: yellow;
+}

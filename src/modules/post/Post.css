@@ -1,10 +1,103 @@
 #post h1 {
-  margin:0.25em 0 0.5em 0;
+  margin:0.25em 0 0.25em 0;
+}
+
+#posts {
+  max-width:950px;
 }
 
 #posts .post {
   display: inline-block;
   margin:0.5em;
   padding:0.25em;
-  border-bottom:0.05em solid black;
+  font-size:0.75em;
+  border:1px solid #ccc;
+  width: 100%;
+}
+
+#posts .post > div {
+  display: inline-block;
+  margin-left:1em;
+  vertical-align:middle;
+  font-size:0.75em;
+}
+
+#posts .post a {
+  border-radius:3px;
+  padding:0.25em;
+}
+
+#posts .post a:hover {
+  background:#eee;
+}
+
+#posts .post a.delete.action {
+  color:red;
+}
+
+#posts .post .post-title {
+  font-size:1em;
+  font-weight: bold;
+}
+
+#posts .post .post-actions a {
+  /*font-size:0.75em;*/
+  margin-left:1em;
+}
+
+#post #post-actions a {
+  margin-right:0.5em;
+  /*font-size:0.75em;*/
+}
+
+#post #comments-wrap {
+  margin-top:0.5em;
+}
+/*
+.post-score-actions[data-can-vote=false]{
+  pointer-events:none;
+}
+
+.post-score-actions[data-can-vote=false] [type=submit]{
+  color:gray !important;
+}
+*/
+#posts .post .vote-button-form [type=submit] {
+  font-size:12px;
+}
+
+#posts .post .post-score {
+  text-align:center;
+}
+
+#post .post {
+  /*border:1px solid black;*/
+}
+
+#post .post .post-score-actions {
+  float: left;
+  margin-left: -2.2em;
+  margin-top: 1.75em;
+  width: 25px;
+  text-align: center;
+}
+
+#post .post .post-score-actions,
+#post .post .name,
+#post .post .date,
+#post .post .author,
+#post .post .category {
+  display:inline-block;
+  font-size:14px;
+  margin-right: 1em;
+  text-align:center;
+}
+
+#post .post .name {
+  font-size:18px;
+}
+
+#post .post .body {
+  padding:0.5em;
+  border:1px solid black;
 }

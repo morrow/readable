@@ -24,16 +24,28 @@ export const processForm = form => {
 
 export const deepCopy = input => Object.assign((input instanceof Array ? [] : {}), input)
 
-export const getSlug = input => {
-  try {
-    return input.toLowerCase().replace(/ /g, '-')
-  } catch(e){
-    console.log('error getting slug for ', input)
-    return ''
+export const timeSince = (date)=>{
+  var seconds = Math.floor((new Date() - date) / 1000)
+  let times = [1, 60, 3600, 86400, 2592000, 31536000]
+  let labels = ['second', 'minute', 'hour', 'day', 'month', 'year']
+  var i = times.length - 1
+  while(i >= 0){
+    let interval = seconds / times[i]
+    if(seconds < 1){
+      return 'Just now'
+    } else if(Math.floor(interval) === 1) {
+      return `1 ${labels[i]} ago`
+    } else if(interval > 1){
+      return `${Math.floor(interval)} ${labels[i]}s ago`
+    }
+    i--
   }
 }
 
-export const capitalize = input => input[0].toUpperCase() + input.slice(1)
+
+export const capitalize = input => input ? input[0].toUpperCase() + input.slice(1) : ''
+
+export const titleCase = input => input.toLowerCase().split(' ').map(s=>capitalize(s)).join(' ')
 
 export const getDiff = (unordered_a, unordered_b)=> {
   if(unordered_a == undefined){
@@ -51,7 +63,7 @@ export const getDiff = (unordered_a, unordered_b)=> {
     if(JSON.stringify(a[key]) != JSON.stringify(b[key])){
       if(a[key] instanceof Object && b[key] instanceof Object){
         diff[key] = getDiff(a[key], b[key])
-      } else {
+      } else if(a[key] && b[key]){
         diff[key] = {
           before: a[key],
           after: b[key],
@@ -72,7 +84,7 @@ export const getAbsolutePath = path => {
 
 export const getCurrentUser = ()=> window.localStorage['current_user'] === undefined ? {} : JSON.parse(window.localStorage['current_user'])
 
-export const isAuthorizedToUpdate = (user, obj)=> parseInt(obj.user_id) === parseInt(user.id)
+export const isAuthorizedToUpdate = (obj, user=getCurrentUser())=> parseInt(obj.user_id) === parseInt(user.id)
 
 export const parsePath = path => {
   let parts = path.split('/').filter(p=>p!=='')
@@ -93,22 +105,37 @@ export const parsePath = path => {
     parsed.controller = parts[0]
     if(parts[1] === 'new'){
       parsed.action = 'new'
-    } else if(parseInt(parts[1]).toString().length === parts[1].length){
-      parsed.id = parts[1]
     } else {
-      parsed.slug = parts[1]
+      if(parsed.controller == 'categories'){
+        parsed.slug = parts[1]
+      } else {
+        parsed.id = parts[1].split('-')[0]
+        parsed.slug = parts[1].split('-').slice(1).join('-')
+      }
     }
   }
   else if(parts.length === 3){
     parsed.controller = parts[0]
-    if(parseInt(parts[1]).toString().length === parts[1].length){
-      parsed.id = parts[1]
+    if(parts[1].indexOf('-') >= 0){
+      parsed.id = parts[1].split('-')[0]
+      parsed.slug = parts[1].split('-').slice(1).join('-')
     } else {
-      parsed.slug = parts[1]
+      parsed.id = parts[1]
     }
     parsed.action = parts[2]
   }
   return parsed
+}
+
+export const getSlug = (input, id) => {
+  if(input === undefined ){
+    return ''
+  }
+  let slug = input.toLowerCase().replace(/ /g, '-')
+  if(id){
+    return [id, slug].join('-')
+  }
+  return slug
 }
 
 export const getIdFromPath = (path)=> {
@@ -116,14 +143,6 @@ export const getIdFromPath = (path)=> {
   if(paths.length > 0){
     return paths[1]
   }
-}
-
-export const getSlugFromPath = (path)=> {
-  let id = getIdFromPath(path)
-  if(parseInt(id).toString().length === id.length){
-    return null
-  }
-  return id
 }
 
 export const getControllerFromPath = (path)=> {

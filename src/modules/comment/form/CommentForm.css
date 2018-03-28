@@ -6,3 +6,26 @@
 .comment-form input {
   padding:0.2em;
 }
+
+.comment-form textarea {
+  font-size:16px;
+  width:500px;
+  height:150px;
+}
+
+.comment-form[data-comment-action=delete] textarea {
+  pointer-events:none;
+  appearance:none;
+  -webkit-appearance:none;
+  resize:none;
+  border:none;
+  font-size:16px;
+  height: auto !important;
+}
+
+.comment-form[data-comment-action=delete] input {
+  color:red;
+  display: inline-block;
+  margin: 1em;
+  padding: 0.5em;
+}

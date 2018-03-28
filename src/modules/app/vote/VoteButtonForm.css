@@ -1,0 +1,33 @@
+.vote-button-form {
+  font-size:14px;
+}
+
+.vote-button-form [type=submit] {
+  border: none;
+  font-size:14px;
+  cursor: pointer;
+  padding: 0.25em;
+  background: white;
+}
+
+.vote-button-form [type=submit]:hover {
+  background: #eee;
+}
+
+.vote-button-form[data-direction=up] [type=submit]{
+  color:rgb(0,230,0);
+}
+
+[data-voted-on] .vote-button-form[data-direction=up] [type=submit]{
+  background:rgb(0,230,0);
+  color: white;
+}
+
+.vote-button-form[data-direction=down] [type=submit]{
+  color:rgb(230,0,0);
+}
+
+[data-voted-on] .vote-button-form[data-direction=down] [type=submit]{
+  background:rgb(230,0,0);
+  color:white;
+}

@@ -1,9 +1,23 @@
 import { connect } from 'react-redux'
-import VoteButton from './VoteButton'
+import VoteButtonForm from './VoteButtonForm'
 import { processForm } from '../appHelpers'
+import { upvoteComment, downvoteComment } from '../../comment/commentActions'
+import { upvotePost, downvotePost } from '../../post/postActions'
 
 export const mapStateToProps = (state, ownProps) => {
   return {
+    ...state
+  }
+}
+
+const actions = {
+  'comment': {
+    'up': upvoteComment,
+    'down': downvoteComment
+  },
+  'post':{
+    'up': upvotePost,
+    'down': downvotePost
   }
 }
 
@@ -12,7 +26,11 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
     onSubmit: (e)=> {
       e.preventDefault()
       let vote = processForm(e.target)
-      console.log(vote)
+      if(vote.targetType in actions){
+        if(vote.direction in actions[vote.targetType]){
+          dispatch(actions[vote.targetType][vote.direction](vote))
+        }
+      }
       return false
     }
   }
@@ -21,6 +39,6 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
 const VoteButtonContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(VoteButton)
+)(VoteButtonForm)
 
 export default VoteButtonContainer

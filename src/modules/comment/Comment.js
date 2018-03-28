@@ -1,27 +1,22 @@
 import React from 'react'
 import './Comment.css'
-import LinkContainer from '../app/link/LinkContainer'
+import { isAuthorizedToUpdate, timeSince } from '../app/appHelpers'
 import VoteButtonContainer from '../app/vote/VoteButtonContainer'
-import { getCurrentUser, isAuthorizedToUpdate } from '../app/appHelpers'
 
 const Comment = props => {
-  let user = getCurrentUser()
   return (
     <div id={props.data.id} className='comment'>
-      <div className='comment-score'>{ props.data.score }</div>
+      <div className='comment-score-actions' data-can-vote={!!!isAuthorizedToUpdate(props.data)}>
+        <VoteButtonContainer target={props.data.id} direction='up' targetType='comment' />
+        <div className='comment-score'>{ props.data.score }</div>
+        <VoteButtonContainer target={props.data.id} direction='down' targetType='comment' />
+      </div>
+      <div className='comment-date'>{ timeSince(new Date(props.data.date)) }</div>
+      <div className='comment-user'> by #{ props.data.user_id }</div>
       <div className='comment-body'>{ props.data.text }</div>
-      { isAuthorizedToUpdate(user, props.data) &&
-        <div className='comment-owner-actions'>
-          <LinkContainer href={`/comments/${props.data.id}/edit`} className='action'>Edit Comment</LinkContainer>
-          <LinkContainer href={`/comments/${props.data.id}/delete`} className='action'>Delete Comment</LinkContainer>
-        </div>
-      }
-      { !!!isAuthorizedToUpdate(user, props.data) &&
-        <div className='comment-actions'>
-          <VoteButtonContainer target={props.data.id} direction='up' />
-          <VoteButtonContainer target={props.data.id} direction='down' />
-        </div>
-      }
+      <div className='comment-owner-actions'>
+
+      </div>
     </div>
   )
 }

@@ -9,10 +9,9 @@ export const receiveUserData = data => ({
 
 export const createUser = ()=> {
   return function(dispatch){
-    const url = '/token'
+    const url = '/user'
     return fetch(url).then(res => res.json()).then((json) => {
       dispatch(receiveUserData(json))
-      // dispatch(navigateToPath('/user'))
     })
   }
 }

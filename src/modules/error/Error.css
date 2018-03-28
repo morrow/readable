@@ -1,0 +1,25 @@
+#error_page {
+  text-align:center;
+  padding: 2em;
+  font-size:1.25em;
+}
+
+#error_page p {
+  margin: 0.5em;
+}
+
+#error_page h2 {
+  border: none;
+  font-size:1.5em;
+}
+
+#error_page #path {
+  color:red;
+  padding: 0.25em;
+}
+
+#error_page a {
+  background:#eee;
+  display: inline-block;
+  padding: 0.2em;
+}

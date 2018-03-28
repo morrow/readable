@@ -6,7 +6,8 @@ const CommentForm = props => {
     <form
       className='comment-form'
       onSubmit={props.onSubmit}
-      action='#'>
+      action='#'
+      data-comment-action={props.commentAction}>
       <div className='field'>
         <textarea
           name='text'
@@ -48,7 +49,14 @@ const CommentForm = props => {
         name='commentAction'
         id='commentAction'
         defaultValue={props.commentAction} />
-      <input type='submit' />
+      { props.commentAction == 'delete' ?
+        <div id='delete-actions'>
+          <input type='submit' name='delete_confirmation' value='delete' />
+          <button onClick={props.cancelAction}>Cancel</button>
+        </div>
+      :
+        <input type='submit' />
+      }
     </form>
   )
 }

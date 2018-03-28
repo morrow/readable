@@ -7,3 +7,36 @@
   padding:0.2em;
 }
 
+.post-form .field {
+  margin:0.5em 0;
+}
+
+.post-form .field label {
+  min-width:150px;
+  vertical-align:top;
+}
+
+.post-form .field input, .post-form .field textarea {
+  font-size:14px;
+}
+
+.post-form .field textarea {
+  width:350px;
+  height:150px;
+}
+
+.post-form [type=submit] {
+  font-size:14px !important;
+  padding:0.25em !important;
+}
+
+#delete-post .post-form .field * {
+  display: none;
+}
+
+#delete-post .post-form .field #title {
+  display: block !important;
+  pointer-events: none;
+  border: none;
+}
+

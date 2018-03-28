@@ -8,7 +8,7 @@ const PostForm = props => {
       onSubmit={props.onSubmit}
       action='#'>
       <div className='field'>
-        <label htmlFor='title' id='title'>Title:</label>
+        <label htmlFor='title'>Title:</label>
         <input
           name='title'
           id='title'
@@ -16,7 +16,7 @@ const PostForm = props => {
           defaultValue={props.data.title} />
       </div>
       <div className='field'>
-        <label htmlFor='category' id='category'>Category:</label>
+        <label htmlFor='category'>Category:</label>
         <input
           name='category'
           id='category'
@@ -55,6 +55,21 @@ const PostForm = props => {
         name='postAction'
         id='postAction'
         defaultValue={props.postAction} />
+      <input
+        type='hidden'
+        name='score'
+        id='score'
+        defaultValue={props.data.score} />
+      <input
+        type='hidden'
+        name='date'
+        id='date'
+        defaultValue={props.data.date} />
+      <input
+        type='hidden'
+        name='comment_total'
+        id='comment_total'
+        defaultValue={props.data.comment_total} />
       <input type='submit' />
     </form>
   )
