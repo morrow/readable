@@ -24,7 +24,7 @@ Available routes:
 
     /posts # index of posts
     /posts/new # create new post
-  /posts/:post_name # view individual post
+    /posts/:post_name # view individual post
     /posts/:post_name/edit # edit individual post
     /posts/:post_name/delete # delete individual post
 
