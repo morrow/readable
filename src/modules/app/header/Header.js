@@ -17,6 +17,7 @@ const Header = props => {
         <LinkContainer className='logo' href='/'>Readable</LinkContainer>
         { links.map(link => {
           return <LinkContainer
+                  key={link}
                   className={link + (props.active_link === link ? ' active' : '') }
                   href={'/' + (link in href_aliases ? href_aliases[link] : link)} >
             { (link in text_aliases ? text_aliases[link] : capitalize(link)) }

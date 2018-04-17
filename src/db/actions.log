@@ -1,40 +1,28 @@
-{"type":"CREATE_POST","post":{"title":"Test Post","category":"Test Category","body":"Test body","id":"1","slug":"1-test-post","user_id":"1","author":"","postAction":"new","score":"0","date":"2018-03-28T20:47:23.239Z","comment_total":"0","":""}}
-{"type":"CREATE_COMMENT","comment":{"text":"This is a test comment","id":"1","slug":"","user_id":"1","score":"0","post_id":"1","post_slug":"1-test-post","commentAction":"new","date":"2018-03-28T20:55:22.956Z"}}
-{"type":"INCREASE_COMMENT_TOTAL","post_id":"1"}
+{"type":"CREATE_POST","post":{"title":"Udacity is the best place to learn React","category":"react","body":"Everyone says so after all.","id":"1","slug":"1-udacity-is-the-best-place-to-learn-react","user_id":"1","author":"","postAction":"new","score":"0","date":"2018-04-17T18:53:15.917Z","comment_total":"0","":""}}
 {"type":"UPVOTE_POST","vote":{"target":"1","direction":"up","targetType":"post"}}
+{"type":"UPVOTE_POST","vote":{"target":"1","direction":"up","targetType":"post"}}
+{"type":"UPVOTE_POST","vote":{"target":"1","direction":"up","targetType":"post"}}
+{"type":"UPVOTE_POST","vote":{"target":"1","direction":"up","targetType":"post"}}
+{"type":"UPVOTE_POST","vote":{"target":"1","direction":"up","targetType":"post"}}
+{"type":"UPVOTE_POST","vote":{"target":"1","direction":"up","targetType":"post"}}
+{"type":"CREATE_POST","post":{"title":"Learn Redux in 10 minutes!","category":"redux","body":"Just kidding. It takes more than 10 minutes to learn technology.","id":"2","slug":"2-learn-redux-in-10-minutes!","user_id":"2","author":"","postAction":"new","score":"0","date":"2018-04-17T18:53:48.016Z","comment_total":"0","":""}}
+{"type":"DOWNVOTE_POST","vote":{"target":"2","direction":"down","targetType":"post"}}
+{"type":"DOWNVOTE_POST","vote":{"target":"2","direction":"down","targetType":"post"}}
+{"type":"DOWNVOTE_POST","vote":{"target":"2","direction":"down","targetType":"post"}}
+{"type":"DOWNVOTE_POST","vote":{"target":"2","direction":"down","targetType":"post"}}
+{"type":"DOWNVOTE_POST","vote":{"target":"2","direction":"down","targetType":"post"}}
+{"type":"CREATE_COMMENT","comment":{"text":"Hi there! I am a COMMENT.","id":"1","slug":"","user_id":"1","score":"0","post_id":"1","post_slug":"1-udacity-is-the-best-place-to-learn-react","commentAction":"new","date":"2018-04-17T18:54:28.593Z"}}
+{"type":"INCREASE_COMMENT_TOTAL","post_id":"1"}
 {"type":"UPVOTE_COMMENT","vote":{"target":"1","direction":"up","targetType":"comment"}}
-{"type":"UPDATE_COMMENT","comment":{"text":"This is an edited test comment","id":"1","slug":"","user_id":"1","score":"1","post_id":"1","post_slug":"1-test-post","commentAction":"edit"}}
-{"type":"CREATE_COMMENT","comment":{"text":"This is another comment","id":"2","slug":"","user_id":"1","score":"0","post_id":"1","post_slug":"1-test-post","commentAction":"new","date":"2018-03-28T20:55:46.012Z"}}
+{"type":"UPVOTE_COMMENT","vote":{"target":"1","direction":"up","targetType":"comment"}}
+{"type":"UPVOTE_COMMENT","vote":{"target":"1","direction":"up","targetType":"comment"}}
+{"type":"UPVOTE_COMMENT","vote":{"target":"1","direction":"up","targetType":"comment"}}
+{"type":"UPVOTE_COMMENT","vote":{"target":"1","direction":"up","targetType":"comment"}}
+{"type":"UPVOTE_COMMENT","vote":{"target":"1","direction":"up","targetType":"comment"}}
+{"type":"CREATE_COMMENT","comment":{"text":"Comments. Are. Cool.","id":"2","slug":"","user_id":"1","score":"0","post_id":"1","post_slug":"1-udacity-is-the-best-place-to-learn-react","commentAction":"new","date":"2018-04-17T18:54:38.157Z"}}
 {"type":"INCREASE_COMMENT_TOTAL","post_id":"1"}
-{"type":"CREATE_POST","post":{"title":"Second Post","category":"Other Category","body":"This is the body of the second post","id":"2","slug":"2-second-post","user_id":"1","author":"","postAction":"new","score":"0","date":"2018-03-28T20:57:20.401Z","comment_total":"0","":""}}
-{"type":"CREATE_POST","post":{"title":"Another Test Post","category":"Test Category","body":"This is the body of another test post","id":"3","slug":"3-another-test-post","user_id":"1","author":"","postAction":"new","score":"0","date":"2018-03-28T20:57:40.644Z","comment_total":"0","":""}}
-{"type":"UPVOTE_POST","vote":{"target":"1","direction":"up","targetType":"post"}}
-{"type":"CREATE_COMMENT","comment":{"text":"This is a comment","id":"3","slug":"","user_id":"1","score":"0","post_id":"3","post_slug":"3-another-test-post","commentAction":"new","date":"2018-03-28T20:58:09.859Z"}}
-{"type":"INCREASE_COMMENT_TOTAL","post_id":"3"}
-{"type":"CREATE_USER","token":"96c0611e5ac01da17b20cbaeafd202556c7cf876d239acdd58cdaa633cdce14b","id":1}
-{"type":"CREATE_USER","token":"df05de271c5042723b7f819eb22e95c9d2ce4d3c3a9fc45509d81e380e2f1f9c","id":2}
-{"type":"CREATE_COMMENT","comment":{"text":"This is a comment from a separate account","id":"4","slug":"","user_id":"2","score":"0","post_id":"1","post_slug":"1-test-post","commentAction":"new","date":"2018-03-28T21:01:08.496Z"}}
-{"type":"INCREASE_COMMENT_TOTAL","post_id":"1"}
-{"type":"UPVOTE_POST","vote":{"target":"1","direction":"up","targetType":"post"}}
-{"type":"UPVOTE_COMMENT","vote":{"target":"4","direction":"up","targetType":"comment"}}
-{"type":"UPVOTE_COMMENT","vote":{"target":"2","direction":"up","targetType":"comment"}}
-{"type":"UPVOTE_COMMENT","vote":{"target":"2","direction":"up","targetType":"comment"}}
-{"type":"UPVOTE_POST","vote":{"target":"1","direction":"up","targetType":"post"}}
-{"type":"UPVOTE_POST","vote":{"target":"1","direction":"up","targetType":"post"}}
-{"type":"DOWNVOTE_COMMENT","vote":{"target":"4","direction":"down","targetType":"comment"}}
-{"type":"DOWNVOTE_COMMENT","vote":{"target":"4","direction":"down","targetType":"comment"}}
-{"type":"DOWNVOTE_COMMENT","vote":{"target":"4","direction":"down","targetType":"comment"}}
-{"type":"UPVOTE_COMMENT","vote":{"target":"4","direction":"up","targetType":"comment"}}
-{"type":"UPVOTE_COMMENT","vote":{"target":"4","direction":"up","targetType":"comment"}}
-{"type":"DOWNVOTE_COMMENT","vote":{"target":"4","direction":"down","targetType":"comment"}}
-{"type":"DOWNVOTE_COMMENT","vote":{"target":"4","direction":"down","targetType":"comment"}}
-{"type":"UPVOTE_POST","vote":{"target":"1","direction":"up","targetType":"post"}}
-{"type":"UPVOTE_COMMENT","vote":{"target":"4","direction":"up","targetType":"comment"}}
-{"type":"UPVOTE_COMMENT","vote":{"target":"4","direction":"up","targetType":"comment"}}
-{"type":"UPVOTE_COMMENT","vote":{"target":"4","direction":"up","targetType":"comment"}}
-{"type":"UPVOTE_POST","vote":{"target":"1","direction":"up","targetType":"post"}}
-{"type":"UPVOTE_POST","vote":{"target":"1","direction":"up","targetType":"post"}}
-{"type":"UPVOTE_POST","vote":{"target":"2","direction":"up","targetType":"post"}}
-{"type":"CREATE_COMMENT","comment":{"text":"This is a new comment","id":"5","slug":"","user_id":"1","score":"0","post_id":"3","post_slug":"3-another-test-post","commentAction":"new","date":"2018-03-28T21:50:30.784Z"}}
-{"type":"INCREASE_COMMENT_TOTAL","post_id":"3"}
-{"type":"UPVOTE_POST","vote":{"target":"2","direction":"up","targetType":"post"}}
+{"type":"DOWNVOTE_COMMENT","vote":{"target":"2","direction":"down","targetType":"comment"}}
+{"type":"DOWNVOTE_COMMENT","vote":{"target":"2","direction":"down","targetType":"comment"}}
+{"type":"DOWNVOTE_COMMENT","vote":{"target":"2","direction":"down","targetType":"comment"}}
+{"type":"DOWNVOTE_COMMENT","vote":{"target":"2","direction":"down","targetType":"comment"}}
+{"type":"DOWNVOTE_COMMENT","vote":{"target":"2","direction":"down","targetType":"comment"}}

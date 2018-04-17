@@ -31,9 +31,9 @@
 }
 
 form input[type=text], input[type=submit], textarea {
-  border: 1px solid #ccc !important;
+  border: 1px solid #ccc;
 }
 
-form.vote-button-form input[type=text], input[type=submit], textarea {
-  border: none !important;
+form.vote-button-form input[type=text], input[type=submit][value="▲"], input[type=submit][value="▼"] {
+  border: none;
 }

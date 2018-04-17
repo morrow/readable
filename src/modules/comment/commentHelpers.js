@@ -11,3 +11,10 @@ export const getNewComment = state => {
   }
   return comment
 }
+
+export const getCommentPath = (data, action) => {
+  if(action){
+    return `/comments/${data.id}/${action}`
+  }
+  return `/comments/${data.id}`
+}

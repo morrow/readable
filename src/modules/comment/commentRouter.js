@@ -4,7 +4,7 @@ import CommentForm from './form/CommentForm'
 import CommentFormContainer from './form/CommentFormContainer'
 import LinkContainer from '../app/link/LinkContainer'
 import { getCurrentUser, getSlug, isAuthorizedToUpdate } from '../app/appHelpers'
-import { getNewComment } from './commentHelpers'
+import { getNewComment, getCommentPath } from './commentHelpers'
 
 export const commentRouter = (state, route)=> {
   if(state.app.id || state.app.comment_slug){
@@ -36,7 +36,10 @@ export const commentRouter = (state, route)=> {
           <h1>Comment</h1>
           <Comment data={comment} />
           { isAuthorizedToUpdate(comment) &&
-            <LinkContainer href='edit' className='action'>Edit</LinkContainer>
+            <div className='comment-actions'>
+              <LinkContainer href='edit' className='action'>Edit</LinkContainer>
+              <LinkContainer href='delete' className='action'>Delete</LinkContainer>
+            </div>
           }
         </div>
       )
@@ -55,11 +58,12 @@ export const commentRouter = (state, route)=> {
         <h1>Comments</h1>
         { state.comment.comments.map(comment => {
           return (
-            <LinkContainer href={comment.slug} className='comment'>{comment.name}</LinkContainer>
-          )
+            <div>
+              <Comment data={comment} />
+            </div>
+            )
           })
         }
-        <LinkContainer href='new' className='action'>New Comment</LinkContainer>
       </div>
     )
   }

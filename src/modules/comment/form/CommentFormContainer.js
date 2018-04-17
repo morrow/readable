@@ -4,6 +4,7 @@ import { dispatch } from 'redux'
 import { updateComment, createComment, deleteComment } from '../commentActions'
 import { increaseCommentTotal, decreaseCommentTotal } from '../../post/postActions'
 import { getPostPath } from '../../post/postHelpers'
+import { getCommentPath } from '../commentHelpers'
 import { navigateToPath, flashMessage } from '../../app/appActions'
 import { getCurrentUser, getSlug, isAuthorizedToUpdate, processForm, getContainingElement } from '../../app/appHelpers'
 
@@ -21,7 +22,7 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
     cancelAction: (e)=> {
       e.preventDefault()
       let comment = processForm(getContainingElement(e.target, 'form'))
-      // dispatch(navigateToPath()))
+      dispatch(navigateToPath(`/posts/${comment.post_slug}`))
       dispatch(flashMessage('Cancelled', 'success'))
     },
     onSubmit: (e)=>{

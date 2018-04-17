@@ -7,7 +7,7 @@ import { userRouter } from '../user/userRouter'
 
 const routers = {
   error: errorRouter,
-  index:  postRouter,
+  index:  homeRouter,
   posts: postRouter,
   comments: commentRouter,
   categories: categoryRouter,
@@ -18,7 +18,6 @@ const routers = {
 const aliases = {
   '/login': 'session',
   '/register': 'user',
-  '/': 'posts',
 }
 
 export const appRouter = (state, route=state.app.controller) => {

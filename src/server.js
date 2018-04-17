@@ -2,6 +2,9 @@ var fs = require('fs')
 var http = require('http')
 var crypto = require('crypto')
 
+const APP_PORT = 3000
+const SERVER_PORT = 3001
+
 const initial_app_state = {
   user: {
     users: [],
@@ -185,7 +188,7 @@ const dispatch = (action)=> {
   let old_state = store.getState()
   let new_state = reduce(old_state, action)
   store.setState(new_state)
-  console.log(action)
+  console.log('action dispatched: ', JSON.stringify(action, null, 2))
   console.log('======================================================')
   return new_state
 }
@@ -199,8 +202,10 @@ const store = createStore(initial_app_state)
 
 // load actions from log
 if(fs.existsSync(LOG_FILE)){
+  console.log('Loading actions from log file to re-construct server state')
   let actions = fs.readFileSync(LOG_FILE, 'utf8').split('\n').filter(a=>a!='')
   actions.forEach(a=>dispatch(JSON.parse(a)))
+  console.log(`Server state reconstructed from log. Opening browser to localhost://${APP_PORT} now...`)
 }
 
 // create log
@@ -214,7 +219,7 @@ var server = http.createServer((req, res)=> {
   var status = 500
   const options = {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'http://localhost:3000',
+    'Access-Control-Allow-Origin': `http://localhost:${APP_PORT}`,
     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
     'Access-Control-Allow-Headers': 'Authorization,Content-Type,X-Timestamp',
   }
@@ -263,4 +268,4 @@ var server = http.createServer((req, res)=> {
   }
 })
 
-server.listen(3001)
+server.listen(SERVER_PORT)

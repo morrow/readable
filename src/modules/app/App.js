@@ -9,7 +9,7 @@ import Categories from '../category/Categories'
 const App = props => {
   return (
     <div id='app'>
-      <Header active_link={props.currentController === 'index' ? 'home' : props.currentController} />
+      <Header active_link={props.currentController} />
       { props.flash &&
         <Flash message={props.flash} flash_type={props.flash_type} />
       }

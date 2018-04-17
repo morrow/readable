@@ -1,7 +1,9 @@
 import React from 'react'
 import './Comment.css'
 import { isAuthorizedToUpdate, timeSince } from '../app/appHelpers'
+import { getCommentPath } from './commentHelpers'
 import VoteButtonContainer from '../app/vote/VoteButtonContainer'
+import LinkContainer from '../app/link/LinkContainer'
 
 const Comment = props => {
   return (
@@ -15,7 +17,12 @@ const Comment = props => {
       <div className='comment-user'> by #{ props.data.user_id }</div>
       <div className='comment-body'>{ props.data.text }</div>
       <div className='comment-owner-actions'>
-
+      { isAuthorizedToUpdate(props.data) &&
+        <div>
+          <LinkContainer href={getCommentPath(props.data, 'edit')} className='action'>Edit Comment</LinkContainer>
+          <LinkContainer href={getCommentPath(props.data, 'delete')} className='action'>Delete Comment</LinkContainer>
+        </div>
+      }
       </div>
     </div>
   )

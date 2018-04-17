@@ -10,9 +10,9 @@ const Categories = props => {
       {
         props.categories.map(category=> {
           if(props.currentCategory === getSlug(category)){
-            return <LinkContainer className='current' href={getCategoryLink(category)}>{category}</LinkContainer>
+            return <LinkContainer key={category} className='current' href={getCategoryLink(category)}>{category}</LinkContainer>
           } else {
-            return <LinkContainer href={getCategoryLink(category)}>{category}</LinkContainer>
+            return <LinkContainer key={category} href={getCategoryLink(category)}>{category}</LinkContainer>
           }
         })
       }

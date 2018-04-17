@@ -13,7 +13,7 @@ export const mapStateToProps = (state, ownProps) => {
     flash: state.app.flash,
     flash_type: state.app.flash_type,
     currentPath: state.app.path,
-    currentController: state.app.controller,
+    currentController: (state.app.controller === 'index' ? 'home' : state.app.controller),
     categories: getCategories(state).sort(),
     currentCategory: state.app.controller === 'categories' ? state.app.slug : null,
   }
