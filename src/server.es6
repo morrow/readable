@@ -3,7 +3,7 @@ var http = require('http')
 var crypto = require('crypto')
 
 const APP_PORT = 3000
-const SERVER_PORT = 3001
+const SERVER_PORT = 3002
 
 const initial_app_state = {
   user: {

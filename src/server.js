@@ -9,7 +9,7 @@ var http = require('http');
 var crypto = require('crypto');
 
 var APP_PORT = 3000;
-var SERVER_PORT = 3001;
+var SERVER_PORT = 3002;
 
 var initial_app_state = {
   user: {
