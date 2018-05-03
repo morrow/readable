@@ -1,8 +1,13 @@
 # Readable
 
-This is a react/redux powered application.
+## Introduction
+This is a react/redux powered application. To get started, run the following command:
 
-Features:
+    npm install && npm start
+
+Then open your browser to [http://localhost:3000](http://localhost:3000).
+
+## Features:
 - Posts
   - Create a new post
   - Edit an existing post
@@ -18,7 +23,7 @@ Features:
 - Categories
   - Categories are automatically generated from post categories
 
-Available routes:
+## Available routes:
 
     / # index
 
@@ -35,5 +40,5 @@ Available routes:
     /users/:user_id # view individual user
 
 
-
+## Backend Server
 This application uses a backend Node.js server which acts as a redux style reducer to implement global state changes. Relevant user actions are sent to the server via middleware and then the server reduces these actions to it's own global shared state, which is then synced across browsers via XHR polling. This is made simpler by having the client poll a route called 'sync' which serves a MD5 hash of the global state. The client will only download the new state if this hash differs from the latest state hash received (AKA global state is different from local state). Actions are also saved to an append-only log file which the server uses to reconstruct state when re-started by simply re-playing the actions. To start over with blank state, simply erase the contents of src/db/actions.log and restart the server.

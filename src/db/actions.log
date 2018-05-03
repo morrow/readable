@@ -26,3 +26,6 @@
 {"type":"DOWNVOTE_COMMENT","vote":{"target":"2","direction":"down","targetType":"comment"}}
 {"type":"DOWNVOTE_COMMENT","vote":{"target":"2","direction":"down","targetType":"comment"}}
 {"type":"DOWNVOTE_COMMENT","vote":{"target":"2","direction":"down","targetType":"comment"}}
+{"type":"UPVOTE_POST","vote":{"target":"2","direction":"up","targetType":"post"}}
+{"type":"DOWNVOTE_POST","vote":{"target":"2","direction":"down","targetType":"post"}}
+{"type":"UPDATE_POST","post":{"title":"Udacity is the best place to learn React","category":"react","body":"Everyone says so after all 123.","id":"1","slug":"1-udacity-is-the-best-place-to-learn-react","user_id":"1","author":"","postAction":"edit","score":"6","date":"2018-04-20T14:33:48.646Z","comment_total":"2","":""}}
