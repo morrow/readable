@@ -84,8 +84,8 @@ export const getAbsolutePath = path => {
 
 export const getCurrentUser = ()=> window.localStorage['current_user'] === undefined ? {} : JSON.parse(window.localStorage['current_user'])
 
-export const isAuthorizedToUpdate = (obj, user=getCurrentUser())=> parseInt(obj.user_id) === parseInt(user.id)
-
+//export const isAuthorizedToUpdate = (obj, user=getCurrentUser())=> parseInt(obj.user_id) === parseInt(user.id)
+export const isAuthorizedToUpdate = ()=> true
 export const parsePath = path => {
   let parts = path.split('/').filter(p=>p!=='')
   var parsed = {

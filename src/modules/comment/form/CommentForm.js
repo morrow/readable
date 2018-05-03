@@ -9,6 +9,7 @@ const CommentForm = props => {
       action='#'
       data-comment-action={props.commentAction}>
       <div className='field'>
+        <label htmlFor='text'>Text: </label>
         <textarea
           name='text'
           id='text'
