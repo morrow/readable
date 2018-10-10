@@ -23,11 +23,9 @@ import mainReducer from './reducers'
 
 import './index.css'
 
-const SYNC_PORT = 3002
-
 export const APP_NAME = 'READABLE'
-export const SYNC_URL = `http://localhost:${SYNC_PORT}/sync`
-export const STATE_URL = `http://localhost:${SYNC_PORT}/state`
+export const SYNC_URL = `/sync`
+export const STATE_URL = `/state`
 
 var current_state_hash = ''
 

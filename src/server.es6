@@ -1,9 +1,12 @@
-var fs = require('fs')
-var http = require('http')
-var crypto = require('crypto')
+const fs = require('fs')
+const url = require('url')
+const path = require('path')
+const http = require('http')
+const crypto = require('crypto')
 
-const APP_PORT = 3000
-const SERVER_PORT = 3002
+const SERVER_PORT = process.argv[2] || 3000
+
+const LOG_FILE = 'db/actions.log'
 
 const initial_app_state = {
   user: {
@@ -16,8 +19,6 @@ const initial_app_state = {
     comments: [],
   },
 }
-
-const LOG_FILE = 'src/db/actions.log'
 
 const createStore = (initial_app_state)=> {
   var state = initial_app_state
@@ -44,7 +45,7 @@ const reduce = (state=initial_app_state, action) => {
           posts
         }
       }
-    break;
+    break
     case 'CREATE_POST':
       return {
         ...state,
@@ -200,12 +201,12 @@ const createUser = state => ({
 
 const store = createStore(initial_app_state)
 
-// load actions from log
+// load initial actions from log
 if(fs.existsSync(LOG_FILE)){
   console.log('Loading actions from log file to re-construct server state')
   let actions = fs.readFileSync(LOG_FILE, 'utf8').split('\n').filter(a=>a!='')
   actions.forEach(a=>dispatch(JSON.parse(a)))
-  console.log(`Server state reconstructed from log. Opening browser to localhost://${APP_PORT} now...`)
+  console.log(`Server state reconstructed from log. Opening browser to localhost://${SERVER_PORT} now...`)
 }
 
 // create log
@@ -213,59 +214,134 @@ var stream = fs.createWriteStream(LOG_FILE, {flags:'a'})
 
 const saveAction = action => stream.write(JSON.stringify(action) + "\n")
 
+// serve file
+const serveFile = (req, res)=> {
+  // extract URL path
+  let pathname = 'build' + url.parse(req.url, true).path
+  // get extension
+  let extension = pathname.split('.')[pathname.split('.').length - 1]
+  // set initial content type
+  var content_type = 'text/plain'
+  // maps file extention to MIME typere
+  let content_type_extensions = {
+    'html':  'text/html',
+    'js':    'text/javascript',
+    'css':   'text/css',
+    'json':  'application/json',
+    'ico':   'image/x-icon',
+    'png':   'image/png',
+    'jpg':   'image/jpeg',
+    'svg':   'image/svg+xml',
+  }
+  // check if file exists
+  fs.exists(pathname, function (exist) {
+    if(!exist) {
+      // file is not found, return index
+      extension = 'html'
+      pathname = 'build/index.html'
+    }
+    // if is a directory search for index file matching the extention
+    else if (fs.statSync(pathname).isDirectory()){
+      extension = 'html'
+      pathname += 'index.' + extension
+    }
+    // read file from file system
+    fs.readFile(pathname, function(err, data){
+      if(err){
+        // 500 internal server error
+        res.statusCode = 500
+        res.end(`Error loading file: ${err}.`)
+      } else {
+        // file is found, set Content-type and send data
+        if(content_type_extensions[extension]){
+          content_type = content_type_extensions[extension]
+        }
+        res.setHeader('Content-Type',  content_type)
+        res.end(data)
+      }
+    })
+  })
+}
+
+// route request
+const route = (req, res, state)=>{
+  // define routes
+  let routes = {
+    '/user': ()=> {
+      let user = createUser(state)
+      let action = {
+        type: 'CREATE_USER',
+        ...user,
+      }
+      dispatch(action)
+      saveAction(action)
+      res.setHeader('Content-Type', 'application/json')
+      res.writeHead(200)
+      res.end(JSON.stringify(user))
+    },
+    '/sync': ()=> {
+      res.setHeader('Content-Type', 'application/json')
+      res.writeHead(200)
+      res.end(JSON.stringify({
+        hash: crypto.createHash('md5').update(JSON.stringify(state, null, 0)).digest('hex')
+      }))
+    },
+    '/state': ()=> {
+      res.setHeader('Content-Type', 'application/json')
+      let methods = {
+        'OPTIONS': ()=>{
+          res.writeHead(200)
+          res.end(JSON.stringify(options, null, 2).slice(1,-1).replace(/"/g, '').replace(/,\n/g, '\n'))
+        },
+        'GET': ()=> {
+          res.writeHead(200)
+          res.end(JSON.stringify(state, null, 2))
+        },
+        'POST': ()=> {
+          var body = ''
+          req.on('data', function (data) {
+            body += data
+          })
+          req.on('end', ()=>{
+            if(body != ''){
+              res.writeHead(200)
+              let action = JSON.parse(body)
+              var result = dispatch(action)
+              saveAction(action)
+              res.end(JSON.stringify(result))
+            } else {
+              res.end(JSON.stringify({500:'error'}))
+            }
+          })
+        }
+      }
+      if(req.method in methods){
+        methods[req.method]()
+      } else {
+        res.end(JSON.stringnify({400:'Bad Request'}))
+      }
+    }
+  }
+  // route or serve file
+  if(req.url in routes){
+    routes[req.url]()
+  } else {
+    serveFile(req, res)
+  }
+}
+
+// create server
 var server = http.createServer((req, res)=> {
   const state = store.getState()
-  let session_id = undefined
-  var status = 500
+  // set headers
   const options = {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': `http://localhost:${APP_PORT}`,
+    'Access-Control-Allow-Origin': `http://localhost:${SERVER_PORT}`,
     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
     'Access-Control-Allow-Headers': 'Authorization,Content-Type,X-Timestamp',
   }
   Object.keys(options).map(key=> res.setHeader(key, options[key]))
-  if(req.url == '/user'){
-    let user = createUser(state)
-    let action = {
-      type: 'CREATE_USER',
-      ...user,
-    }
-    dispatch(action)
-    saveAction(action)
-    res.writeHead(200)
-    res.end(JSON.stringify(user))
-  }
-  else if(req.url == '/sync'){
-    res.writeHead(200)
-    res.end(JSON.stringify({
-      hash: crypto.createHash('md5').update(JSON.stringify(state, null, 0)).digest('hex')
-    }))
-  }
-  else if(req.url == '/state'){
-    if(req.method == 'OPTIONS'){
-      res.end(JSON.stringify(options, null, 2).slice(1,-1).replace(/"/g, '').replace(/,\n/g, '\n'))
-    }
-    if(req.method == 'GET'){
-      res.end(JSON.stringify(state, null, 2))
-    }
-    else if(req.method == 'POST'){
-      var body = ''
-      req.on('data', function (data) {
-        body += data;
-      })
-      req.on('end', ()=>{
-        if(body != ''){
-          res.writeHead(200)
-          let action = JSON.parse(body)
-          var result = dispatch(action)
-          saveAction(action)
-          res.end(JSON.stringify(result))
-        } else {
-          res.end(JSON.stringify({500:'error'}))
-        }
-      })
-    }
-  }
+  // route request
+  route(req, res, state)
 })
 
 server.listen(SERVER_PORT)
